@@ -10,6 +10,10 @@
   opacity: 0.85;
 }
 
+.play-list .ant-list-item:hover .ant-list-item-action {
+  display: block;
+}
+
 .anticon,
 .material-icons {
   font-size: 24px;
@@ -46,6 +50,10 @@
 
 .preview img {
   border-radius: 10px;
+}
+
+.ant-list-item-action {
+  display: none;
 }
 
 .preview-small .ant-list-item-meta-title,

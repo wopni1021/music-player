@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { List, Avatar } from "antd";
 import "antd/lib/icon/style/css";
 import Preview from "./Preview";
 import PlayList from "./PlayList";
@@ -88,7 +87,7 @@ class App extends Component {
     this.state = {
       showPreview: false,
       isPlaying: false,
-      isShuffle: false,
+      isShuffle: true,
       currentSong: null,
       shuffledData: this.data
     };
@@ -97,7 +96,7 @@ class App extends Component {
     this.onPlay = this.onPlay.bind(this);
     this.onAudioEnd = this.onAudioEnd.bind(this);
     this.onAngelButtonClick = this.onAngelButtonClick.bind(this);
-    this.onModeButtonClick = this.onModeButtonClick.bind(this);
+    // this.onModeButtonClick = this.onModeButtonClick.bind(this);
     this.togglePreview = this.togglePreview.bind(this);
   }
 
@@ -141,11 +140,11 @@ class App extends Component {
     let audio = document.getElementsByTagName("audio")[0];
     if (!audio) {
       // if no current song, shuffle the list and play
-      const shuffled = this.setSongs();
-      this.setState({
-        shuffledData: shuffled
-      });
-      this.onPlay(shuffled[0]);
+      // const shuffled = this.setSongs();
+      // this.setState({
+      //   shuffledData: shuffled
+      // });
+      this.onPlay(this.state.shuffledData[0]);
     } else {
       let currentStatus = this.state.isPlaying;
       if (currentStatus) {
@@ -174,13 +173,13 @@ class App extends Component {
     this.onPlay(nextToPlay);
   }
 
-  onModeButtonClick(toShuffle) {
-    console.log("toshuffle=" + toShuffle + ".....");
-    this.setState({
-      shuffledData: toShuffle ? this.getShuffledSongs() : this.data,
-      isShuffle: toShuffle
-    });
-  }
+  // onModeButtonClick(toShuffle) {
+  //   console.log("toshuffle=" + toShuffle + ".....");
+  //   this.setState({
+  //     shuffledData: toShuffle ? this.getShuffledSongs() : this.data,
+  //     isShuffle: toShuffle
+  //   });
+  // }
 
   setSongs() {
     if (this.state.isShuffle) {
@@ -238,13 +237,26 @@ class App extends Component {
   }
 
   render() {
-    const { showPreview, isPlaying, isShuffle, currentSong } = this.state;
+    const {
+      showPreview,
+      isPlaying,
+      isShuffle,
+      currentSong,
+      shuffledData
+    } = this.state;
     return (
       <div className="player">
         <header className="player-header">
-          <p>Music Player</p>
+          <b>Up Next</b>
         </header>
-        {!showPreview && <PlayList data={this.data} onPlay={this.onPlay} />}
+
+        {!showPreview && (
+          <PlayList
+            data={shuffledData}
+            onClick={this.onPlay}
+            className="play-list"
+          />
+        )}
 
         {showPreview && (
           <Preview
@@ -255,6 +267,14 @@ class App extends Component {
         )}
 
         {currentSong && (
+          <PlayList
+            data={[currentSong]}
+            onClick={this.togglePreview}
+            className="preview-small"
+          />
+        )}
+
+        {/* {currentSong && (
           <List
             itemLayout="horizontal"
             dataSource={[currentSong]}
@@ -274,11 +294,12 @@ class App extends Component {
               </List.Item>
             )}
           />
-        )}
+        )} */}
+
         <ActionButtons
           onPlayButtonClick={this.onPlayButtonClick}
           onAngelButtonClick={this.onAngelButtonClick}
-          onModeButtonClick={this.onModeButtonClick}
+          // onModeButtonClick={this.onModeButtonClick}
           isPlaying={isPlaying}
           isShuffle={isShuffle}
         />

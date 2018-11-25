@@ -13,13 +13,13 @@ const ActionButtons = (
     />
 
     <Icon type="step-forward" onClick={() => props.onAngelButtonClick(true)} />
-    {props.isShuffle ? (
+    {/* {props.isShuffle ? (
       <i className="material-icons" onClick={() => props.onModeButtonClick(false)}>
         shuffle
       </i>
     ) : (
       <Icon type="retweet" onClick={() => props.onModeButtonClick(true)} />
-    )}
+    )} */}
   </div>
 );
 
