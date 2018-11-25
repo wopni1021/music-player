@@ -1,0 +1,111 @@
+.player {
+  width: 500px;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 2px 40px rgba(0, 0, 0, 0.15);
+  padding: 24px;
+  background: white;
+  opacity: 0.85;
+}
+
+.anticon,
+.material-icons {
+  font-size: 24px;
+  padding: 0 16px;
+  cursor: pointer;
+}
+
+.ant-list-item-meta {
+  cursor: pointer;
+}
+
+.play-action {
+  padding: 26px 0 26px 0;
+  text-align: center;
+  border-top: 1px solid #e8e8e8;
+  margin: 0 -26px -26px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.preview-small {
+  position: absolute;
+  margin-left: -2px;
+}
+
+.preview {
+  text-align: center;
+  height: 437px;
+  width: 70%;
+  margin: 0 auto;
+  padding-top: 24px;
+  border: none;
+  cursor: pointer;
+}
+
+.preview img {
+  border-radius: 10px;
+}
+
+.preview-small .ant-list-item-meta-title,
+.preview-small .ant-list-item-meta-description {
+  width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preview-small .ant-list-item-meta-avatar {
+  margin-right: 7px;
+}
+
+.preview-small .ant-avatar {
+  height: 46px;
+  width: 46px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0.35, 0, 0, 0.35);
+}
+
+.material-icons {
+  vertical-align: -0.125em;
+}
+
+.anticon-retweet,
+.material-icons {
+  position: absolute;
+  margin-left: 66px;
+}
+
+body {
+  background: url("background.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  filter: alpha(opacity=20);
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
