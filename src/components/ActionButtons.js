@@ -1,19 +1,27 @@
 import React from "react";
-import { Icon } from "antd";
+import { Icon, Tooltip } from "antd";
 
 const ActionButtons = props => (
   <div className="play-action">
-    <Icon
-      type="step-backward"
-      onClick={() => props.onAngelButtonClick(false)}
-    />
-    <Icon
-      id="ActionBtnPlay"
-      type={props.isPlaying ? "pause-circle" : "caret-right"}
-      onClick={() => props.onPlayButtonClick()}
-    />
-
-    <Icon type="step-forward" onClick={() => props.onAngelButtonClick(true)} />
+    <Tooltip placement="top" title={"Replay"}>
+      <Icon
+        type="step-backward"
+        onClick={() => props.onAngleButtonClick(false)}
+      />
+    </Tooltip>
+    <Tooltip placement="top" title={"Play"}>
+      <Icon
+        id="ActionBtnPlay"
+        type={props.isPlaying ? "pause-circle" : "caret-right"}
+        onClick={() => props.onPlayButtonClick()}
+      />
+    </Tooltip>
+    <Tooltip placement="top" title={"Next"}>
+      <Icon
+        type="step-forward"
+        onClick={() => props.onAngleButtonClick(true)}
+      />
+    </Tooltip>
   </div>
 );
 

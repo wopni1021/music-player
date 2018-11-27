@@ -16,7 +16,7 @@
 }
 
 .ant-slider {
-  min-width: 180px;
+  min-width: 80px;
 }
 
 .play-list .ant-list-item:hover .ant-list-item-action {
@@ -30,10 +30,6 @@
   cursor: pointer;
 }
 
-.ant-list-item-meta {
-  cursor: pointer;
-}
-
 .play-action {
   padding: 26px 0 26px 0;
   text-align: center;
@@ -44,12 +40,13 @@
 .preview-small {
   position: absolute;
   margin-left: -2px;
+  cursor: pointer;
 }
 
 .preview {
   text-align: center;
-  height: 437px;
-  width: 70%;
+  height: 364px;
+  width: 59%;
   margin: 0 auto;
   padding-top: 24px;
   border: none;

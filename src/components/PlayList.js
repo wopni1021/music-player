@@ -24,7 +24,7 @@ const PlayList = props => (
           avatar={<Avatar src={process.env.PUBLIC_URL + item.image} />}
           title={item.title}
           description={item.singer}
-          onClick={() => props.onClick(item)}
+          onClick={props.onClick ? () => props.onClick(item) : null}
         />
       </List.Item>
     )}
