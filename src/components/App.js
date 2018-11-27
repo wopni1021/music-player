@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import _ from "lodash";
 import "antd/lib/icon/style/css";
 import Preview from "./Preview";
 import PlayList from "./PlayList";
 import ActionButtons from "./ActionButtons";
 import "./App.css";
+import "antd/lib/slider/style/css";
+import { Slider } from "antd";
 
 class App extends Component {
   constructor(props) {
@@ -41,67 +44,132 @@ class App extends Component {
       //   image: '/assets/images/cover3.jpg',
       //   url: "https://dl.last.fm/static/1543141043/132562470/016d68a860182ba59413199a1f68d800fed1a9743731338499cc5318d28dccfb/Calexico+-+Para.mp3"
       // },
+      // {
+      //   title: "Anchor",
+      //   singer: "Motorama",
+      //   image: "/assets/images/cover4.jpg",
+      //   url:
+      //     "https://dl.last.fm/static/1543141124/114320956/9b9f7c0ebbb66e2e2abe0bea3d09a66c7f4c6c44d6cac1c8d0c612f24d191272/Motorama+-+Anchor.mp3"
+      // },
+      // {
+      //   title: "Lovesick Teenagers",
+      //   singer: "Bear in Heaven ",
+      //   image: "/assets/images/cover5.jpg",
+      //   url:
+      //     "https://dl.last.fm/static/1543141173/119595371/80f717d17d5725436779ed938188f5a9e9a64ffcc95e7f1e42412e2603d0a475/Bear+in+Heaven+-+Lovesick+Teenagers.mp3"
+      // },
+      // {
+      //   title: "I Will Drown",
+      //   singer: "Soley",
+      //   image: "/assets/images/cover6.jpg",
+      //   url:
+      //     "https://dl.last.fm/static/1543141307/127464931/f706d78a2197bf7082d02cde7e05530345a14cf4613bbb7a3e5958268e5dc054/S%C3%B3ley+-+I%27ll+Drown.mp3"
+      // },
+      // {
+      //   title: "My Leather, My Fur, My Nails",
+      //   singer: "Stepdad Ordinaire",
+      //   image: "/assets/images/cover7.jpg",
+      //   url:
+      //     "https://dl.last.fm/static/1543141307/122034527/0f5aea3e97a0987dc8ae02c8f80218631db1f2da0d3bc927a6a0f96f7128199b/Stepdad+-+My+Leather%2C+My+Fur%2C+My+Nails.mp3"
+      // },
+      // {
+      //   title: "Deeper Than Inside",
+      //   singer: "Sammy",
+      //   image: "/assets/images/cover8.jpg",
+      //   url:
+      //     "https://dl.last.fm/static/1543141307/117125661/a5ca70d0443f17ad64d49cb34ebf17eb8dc1d7ad117b5d8ea9cb64665bd464a5/Rites+of+Spring+-+Deeper+Than+Inside.mp3"
+      // },
+      // {
+      //   title: "Cute Thing",
+      //   singer: "Iris Lee",
+      //   image: "/assets/images/cover9.jpg",
+      //   url:
+      //     "https://dl.last.fm/static/1543141536/129398378/3c52c8872bd4b7fb5ea74aaecdcffab3b19c5474f65ccf9cc500f89a56207e91/Car+Seat+Headrest+-+Cute+Thing.mp3"
+      // }
       {
-        title: "Anchor",
+        title: "0",
         singer: "Motorama",
         image: "/assets/images/cover4.jpg",
-        url:
-          "https://dl.last.fm/static/1543141124/114320956/9b9f7c0ebbb66e2e2abe0bea3d09a66c7f4c6c44d6cac1c8d0c612f24d191272/Motorama+-+Anchor.mp3"
+        url: "http://www.noiseaddicts.com/samples_1w72b820/3719.mp3"
       },
       {
-        title: "Lovesick Teenagers",
+        title: "1",
         singer: "Bear in Heaven ",
         image: "/assets/images/cover5.jpg",
-        url:
-          "https://dl.last.fm/static/1543141173/119595371/80f717d17d5725436779ed938188f5a9e9a64ffcc95e7f1e42412e2603d0a475/Bear+in+Heaven+-+Lovesick+Teenagers.mp3"
+        // url:
+        //   "https://dl.last.fm/static/1543141173/119595371/80f717d17d5725436779ed938188f5a9e9a64ffcc95e7f1e42412e2603d0a475/Bear+in+Heaven+-+Lovesick+Teenagers.mp3"
+        url: "http://www.noiseaddicts.com/samples_1w72b820/3719.mp3"
       },
       {
-        title: "I Will Drown",
+        title: "2",
         singer: "Soley",
         image: "/assets/images/cover6.jpg",
-        url:
-          "https://dl.last.fm/static/1543141307/127464931/f706d78a2197bf7082d02cde7e05530345a14cf4613bbb7a3e5958268e5dc054/S%C3%B3ley+-+I%27ll+Drown.mp3"
+        // url:
+        //   "https://dl.last.fm/static/1543141307/127464931/f706d78a2197bf7082d02cde7e05530345a14cf4613bbb7a3e5958268e5dc054/S%C3%B3ley+-+I%27ll+Drown.mp3"
+        url: "http://www.noiseaddicts.com/samples_1w72b820/3719.mp3"
       },
       {
-        title: "My Leather, My Fur, My Nails",
+        title: "3",
         singer: "Stepdad Ordinaire",
         image: "/assets/images/cover7.jpg",
-        url:
-          "https://dl.last.fm/static/1543141307/122034527/0f5aea3e97a0987dc8ae02c8f80218631db1f2da0d3bc927a6a0f96f7128199b/Stepdad+-+My+Leather%2C+My+Fur%2C+My+Nails.mp3"
+        url: "http://www.noiseaddicts.com/samples_1w72b820/3719.mp3"
       },
       {
-        title: "Deeper Than Inside",
+        title: "4",
         singer: "Sammy",
         image: "/assets/images/cover8.jpg",
-        url:
-          "https://dl.last.fm/static/1543141307/117125661/a5ca70d0443f17ad64d49cb34ebf17eb8dc1d7ad117b5d8ea9cb64665bd464a5/Rites+of+Spring+-+Deeper+Than+Inside.mp3"
+        url: "http://www.noiseaddicts.com/samples_1w72b820/3719.mp3"
       },
       {
-        title: "Cute Thing",
+        title: "5",
         singer: "Iris Lee",
         image: "/assets/images/cover9.jpg",
         url:
           "https://dl.last.fm/static/1543141536/129398378/3c52c8872bd4b7fb5ea74aaecdcffab3b19c5474f65ccf9cc500f89a56207e91/Car+Seat+Headrest+-+Cute+Thing.mp3"
+      },
+      {
+        title: "6",
+        singer: "Sleepmakeswaves",
+        image: "/assets/images/cover0.jpg",
+        // url:
+        //   "https://dl.last.fm/static/1543036799/110637448/fdcfdfc9339d2673e83219378e4f5fd612e36453127ea4e9f4a2c15e8b6f3a3e/Sleepmakeswaves+-+One+Day+You+Will+Teach+Me+to+Let+Go+of+My+Fears.mp3"
+        url: "http://www.noiseaddicts.com/samples_1w72b820/3719.mp3"
+      },
+      {
+        title: "7",
+        singer: "The Thermals",
+        image: "/assets/images/cover1.jpg",
+        // url:
+        //   "https://dl.last.fm/static/1543036974/119687700/add481d515c066a42af8a2293f8e43eac1ff5c5977b894112902ea69c3c7287a/The+Thermals+-+Now+We+Can+See.mp3"
+        url: "http://www.noiseaddicts.com/samples_1w72b820/3723.mp3"
       }
     ];
     this.state = {
       showPreview: false,
       isPlaying: false,
-      isShuffle: true,
       currentSong: null,
-      shuffledData: this.data
+      peekNo: 5, //number of songs user want to see in the list, default = 5
+      counter: 0, //number of songs played already
+      peekQueueArr: [], //songs to be displayed
+      backupArr: [] // songs not displayed but can be chosen as next songs (non-repeat compared with peekQueue)
     };
 
     this.onPlayButtonClick = this.onPlayButtonClick.bind(this);
     this.onPlay = this.onPlay.bind(this);
-    this.onAudioEnd = this.onAudioEnd.bind(this);
     this.onAngelButtonClick = this.onAngelButtonClick.bind(this);
-    // this.onModeButtonClick = this.onModeButtonClick.bind(this);
     this.togglePreview = this.togglePreview.bind(this);
+    this.shiftList = this.shiftList.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.setState({
+      peekQueueArr: _.cloneDeep(this.data.slice(0, this.state.peekNo)),
+      backupArr: _.cloneDeep(this.data.slice(this.state.peekNo)),
+      currentSong: this.data[0]
+    });
+  }
 
+  // pass next song and play it
   onPlay(item) {
     this.setState({
       currentSong: item,
@@ -116,24 +184,12 @@ class App extends Component {
 
     let audio = document.createElement("audio");
     audio.src = item.url;
-    audio.style.display = "none"; //added to fix ios issue
+    audio.style.display = "none";
     audio.autoplay = false; //avoid the user has not interacted with your page issue
     document.body.appendChild(audio);
-    audio.onended = () => this.onAudioEnd(audio, item);
+    audio.onended = () => this.onPlay(this.state.peekQueueArr[0]);
     audio.play();
-  }
-
-  onAudioEnd(audio, item) {
-    audio.remove(); //remove after playing to clean the Dom
-
-    var nextSong = this.getNextSong(item);
-
-    if (this.state.currentSong && this.state.isPlaying) {
-      this.setState({
-        currentSong: nextSong
-      });
-      this.onPlay(nextSong);
-    }
+    this.shiftList();
   }
 
   onPlayButtonClick() {
@@ -144,7 +200,15 @@ class App extends Component {
       // this.setState({
       //   shuffledData: shuffled
       // });
-      this.onPlay(this.state.shuffledData[0]);
+      // this.setState({
+      //   shuffledData: this.state.currentLoop.slice(
+      //     this.state.firstIndex,
+      //     this.state.firstIndex + this.state.peekNo
+      //   )
+      // });
+      //!!! first shuffle to randomize
+
+      this.onPlay(this.state.peekQueueArr[0]);
     } else {
       let currentStatus = this.state.isPlaying;
       if (currentStatus) {
@@ -165,33 +229,15 @@ class App extends Component {
   onAngelButtonClick(toNext) {
     let nextToPlay;
     if (toNext) {
-      console.log("going to play next song");
-      nextToPlay = this.getNextSong(this.state.currentSong);
+      nextToPlay = this.getNextSong();
     } else {
       nextToPlay = this.getPreviousSong(this.state.currentSong);
     }
     this.onPlay(nextToPlay);
   }
 
-  // onModeButtonClick(toShuffle) {
-  //   console.log("toshuffle=" + toShuffle + ".....");
-  //   this.setState({
-  //     shuffledData: toShuffle ? this.getShuffledSongs() : this.data,
-  //     isShuffle: toShuffle
-  //   });
-  // }
-
-  setSongs() {
-    if (this.state.isShuffle) {
-      return this.getShuffledSongs();
-    } else {
-      return this.data.slice(0);
-    }
-  }
-
-  getShuffledSongs() {
-    const array = this.data.slice(0);
-    var currentIndex = array.length,
+  getShuffledSongs(newArr) {
+    var currentIndex = newArr.length,
       temporaryValue,
       randomIndex;
 
@@ -202,32 +248,49 @@ class App extends Component {
       currentIndex -= 1;
 
       // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
+      temporaryValue = newArr[currentIndex];
+      newArr[currentIndex] = newArr[randomIndex];
+      newArr[randomIndex] = temporaryValue;
     }
-    return array;
+    return newArr;
   }
 
-  getNextSong(item) {
-    for (var i = 0; i < this.state.shuffledData.length - 1; i++) {
-      if (item === this.state.shuffledData[i]) {
-        return this.state.shuffledData[i + 1];
-      }
+  getNextSong() {
+    return this.shiftList()[0];
+  }
+
+  shiftList() {
+    const newCounter = this.state.counter + 1; //counter including next song
+    let bk = _.cloneDeep(this.state.backupArr);
+    let queue = _.cloneDeep(this.state.peekQueueArr);
+    const currentPlaying = _.cloneDeep(queue[0]);
+    queue.push(_.cloneDeep(bk[0]));
+    bk.push(_.cloneDeep(queue[0]));
+    bk.shift();
+    queue.shift();
+
+    const needToShuffleBkArr =
+      this.state.counter % (this.data.length - this.state.peekNo) ===
+      this.data.length - this.state.peekNo - 1;
+    if (needToShuffleBkArr) {
+      bk = this.getShuffledSongs(_.cloneDeep(bk));
     }
     this.setState({
-      shuffledData: this.setSongs()
+      counter: newCounter,
+      peekQueueArr: queue,
+      currentSong: currentPlaying,
+      backupArr: bk
     });
-    return this.state.shuffledData[0];
+    return queue;
   }
 
   getPreviousSong(item) {
-    for (var i = 1; i < this.state.shuffledData.length; i++) {
-      if (item === this.state.shuffledData[i]) {
-        return this.state.shuffledData[i - 1];
-      }
-    }
-    return this.state.shuffledData[this.state.shuffledData.length - 1];
+    //   for (let i = 1; i < this.state.shuffledData.length; i++) {
+    //     if (item === this.state.shuffledData[i]) {
+    //       return this.state.shuffledData[i - 1];
+    //     }
+    //   }
+    //   return this.state.shuffledData[this.state.shuffledData.length - 1];
   }
 
   togglePreview() {
@@ -236,23 +299,34 @@ class App extends Component {
     }));
   }
 
+  onSliderChange(value) {
+    const wholeList = this.state.peekQueueArr.concat(this.state.backupArr);
+    this.setState({
+      peekNo: value,
+      peekQueueArr: wholeList.slice(0, value),
+      backupArr: wholeList.slice(value)
+    });
+  }
+
   render() {
-    const {
-      showPreview,
-      isPlaying,
-      isShuffle,
-      currentSong,
-      shuffledData
-    } = this.state;
+    const { showPreview, isPlaying, currentSong, peekQueueArr } = this.state;
     return (
       <div className="player">
-        <header className="player-header">
-          <b>Up Next</b>
-        </header>
+        <div className="play-header">
+          <header className="player-title">
+            <b>Up Next</b>
+          </header>
+          <Slider
+            defaultValue={5}
+            min={1}
+            max={8}
+            onChange={value => this.onSliderChange(value)}
+          />
+        </div>
 
         {!showPreview && (
           <PlayList
-            data={shuffledData}
+            data={peekQueueArr}
             onClick={this.onPlay}
             className="play-list"
           />
@@ -274,34 +348,10 @@ class App extends Component {
           />
         )}
 
-        {/* {currentSong && (
-          <List
-            itemLayout="horizontal"
-            dataSource={[currentSong]}
-            className="preview-small"
-            renderItem={item => (
-              <List.Item>
-                <List.Item.Meta
-                  avatar={<Avatar src={process.env.PUBLIC_URL + item.image} />}
-                  title={item.title}
-                  description={item.singer}
-                  onClick={() =>
-                    this.setState({
-                      showPreview: !showPreview
-                    })
-                  }
-                />
-              </List.Item>
-            )}
-          />
-        )} */}
-
         <ActionButtons
           onPlayButtonClick={this.onPlayButtonClick}
           onAngelButtonClick={this.onAngelButtonClick}
-          // onModeButtonClick={this.onModeButtonClick}
           isPlaying={isPlaying}
-          isShuffle={isShuffle}
         />
       </div>
     );
