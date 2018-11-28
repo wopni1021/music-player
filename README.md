@@ -19,6 +19,9 @@ After opening the page, you can start shuffling by clicking "play" button. The s
 Alternatively, you can pause any music by clicking the "pause" button next to it. <br> 
 Want to play it again? Simply click the "step-backward" button which is placed left to the play button, and the song will be played again for you.
 
+* Adjust the playlist <br>
+Whether the list is too short or too long for you, you can easily change its length by sliding the slider on the top right corner of the player! But don't make it too long because it is designed to be concise and simple!
+
 * Preview Current Playing <br>
 The song that is currenly playing can be seen in the left bottom corner of the music player, with its album cover, tile and singer name displayed. Click it, and all the details about this song will be displayed.
 
