@@ -16,15 +16,23 @@ class App extends Component {
     super(props);
 
     this.data = data;
+
     this.state = {
       showPreview: false,
       isPlaying: false,
       currentSong: null,
       peekNo: 5, //number of songs user want to see in the list, default = 5
       counter: 0, //number of songs played already
-      peekQueueArr: [], //songs to be displayed
-      backupArr: [] // songs not displayed but can be chosen as next songs (non-repeat compared with peekQueue)
+
+      // peekQueueArr + backupArry = whole data list/loop;
+      // every time a song is played, peekQueue will move that song to the backupArr, so that each loop will contain the whole data
+      peekQueueArr: [], //songs to be played, displayed in the playlist
+      backupArr: [] // songs not displayed but will replenish peekQueue
     };
+
+    // TODO if only one song
+    this.peekMax = Math.min(this.data.length - 1, 8); // the max number user can choose to view in the page
+    this.peekMin = 1; // the min number user can choose to view in the page
 
     this.onPlayButtonClick = this.onPlayButtonClick.bind(this);
     this.onPlay = this.onPlay.bind(this);
@@ -59,15 +67,23 @@ class App extends Component {
     audio.style.display = "none";
     audio.autoplay = false; //avoid the user has not interacted with your page issue
     document.body.appendChild(audio);
-    audio.onended = () => this.onPlay(this.state.peekQueueArr[0]);
-    audio.play();
-    this.shiftList();
+    audio.onended = () => {
+      // play the next song
+      this.onPlay(this.state.peekQueueArr[0]);
+      this.shiftList();
+    };
+    audio.play().catch(() => {
+      console.log("error");
+    });
   }
 
   onPlayButtonClick() {
     let audio = document.getElementsByTagName("audio")[0];
     if (!audio) {
-      this.onPlay(this.state.peekQueueArr[0]);
+      console.log("first=" + this.state.peekQueueArr[0].url);
+      const nowPlay = this.state.peekQueueArr[0];
+      this.onPlay(nowPlay);
+      this.shiftList();
     } else {
       let currentStatus = this.state.isPlaying;
       if (currentStatus) {
@@ -82,16 +98,15 @@ class App extends Component {
   }
 
   onAngleButtonClick(toNext) {
-    let nextToPlay;
     if (toNext) {
-      nextToPlay = this.getNextSong();
-      this.onPlay(nextToPlay);
+      this.onPlay(this.state.peekQueueArr[0]);
+      this.shiftList();
     } else {
       this.replay();
     }
   }
 
-  getShuffledSongs(newArr) {
+  rearrangeSongs(newArr) {
     var currentIndex = newArr.length,
       temporaryValue,
       randomIndex;
@@ -110,36 +125,50 @@ class App extends Component {
     return newArr;
   }
 
-  getNextSong() {
-    return this.shiftList()[0];
-  }
-
+  // shift the whole array, so that peekqueue is updated with next-to-play songs
+  // AND move the already-played song (previously in the peekqueue) to the backup array
   shiftList() {
     const { counter, backupArr, peekQueueArr } = this.state;
     const newCounter = counter + 1; //counter including next song
-    let bk = _.cloneDeep(backupArr);
-    const queue = _.cloneDeep(peekQueueArr);
-    const currentPlaying = _.cloneDeep(queue[0]);
-    // move the song from backup arr to the last of queue array
-    queue.push(bk[0]);
-    bk.push(queue[0]);
-    bk.shift();
-    queue.shift();
+    let backupCopy = _.cloneDeep(backupArr);
+    const peekQueueCopy = _.cloneDeep(peekQueueArr);
+    const currentSong = _.cloneDeep(peekQueueCopy[0]);
 
-    // decide whether need to shuffle the next few songs; if peekNo = 2, then when 12345 -> 45XXX need to shuffle
-    const needToShuffleBkArr =
-      this.state.counter % (this.data.length - this.state.peekNo) ===
-      this.data.length - this.state.peekNo - 1;
-    if (needToShuffleBkArr) {
-      bk = this.getShuffledSongs(bk);
+    // decide whether need to rearrange the order of the next few songs; if peekNo = 2, then when 12345 -> 45XXX need to shuffle
+    const shouldRearrangeBkArr =
+      this.state.counter % this.data.length ===
+      this.data.length - this.state.peekNo + 1;
+    // console.log("should rearrange: " + shouldRearrangeBkArr);
+    if (shouldRearrangeBkArr) {
+      backupCopy = this.rearrangeSongs(backupCopy);
     }
+
+    // move the song from backup arr to the last of queue array
+    peekQueueCopy.push(backupCopy[0]);
+    backupCopy.push(peekQueueCopy[0]);
+    backupCopy.shift();
+    peekQueueCopy.shift();
+
+    // console.log("peek");
+    // for (let i = 0; i < peekQueueCopy.length; i++)
+    //   console.log(i + 1 + ": " + peekQueueCopy[i].url);
+
+    // console.log("backup");
+    // for (let i = 0; i < backupCopy.length; i++)
+    //   console.log(i + 1 + ": " + backupCopy[i].url);
+
     this.setState({
       counter: newCounter,
-      peekQueueArr: queue,
-      currentSong: currentPlaying,
-      backupArr: bk
+      peekQueueArr: peekQueueCopy,
+      currentSong: currentSong,
+      backupArr: backupCopy
     });
-    return queue; //peekQueue
+  }
+
+  setCurrentSong(currentSong) {
+    this.setState({
+      currentSong: currentSong
+    });
   }
 
   replay() {
@@ -170,7 +199,13 @@ class App extends Component {
   }
 
   render() {
-    const { showPreview, isPlaying, currentSong, peekQueueArr } = this.state;
+    const {
+      showPreview,
+      isPlaying,
+      currentSong,
+      peekQueueArr,
+      peekNo
+    } = this.state;
     return (
       <div className="player">
         <Popover
@@ -181,13 +216,14 @@ class App extends Component {
         >
           <div className="play-header">
             <header className="player-title">
-              <h2>Up Next</h2>
+              {!showPreview && <h2>Up Next</h2>}
+              {showPreview && <h2>Now Playing</h2>}
             </header>
 
             <Slider
-              defaultValue={5}
-              min={1}
-              max={8} //smaller than data size and consider resolution
+              defaultValue={peekNo}
+              min={this.peekMin}
+              max={this.peekMax}
               onChange={value => this.onSliderChange(value)}
             />
           </div>
