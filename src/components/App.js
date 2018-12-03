@@ -15,13 +15,17 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.data = data;
+    // if only 1 song, duplicate the song in data for loop purpose
+    this.data = data.length === 1 ? data.concat(data) : data;
+
+    this.peekMax = this.data.length > 1 ? Math.min(this.data.length - 1, 8) : 1; // the max number user can choose to view in the page
+    this.peekMin = 1; // the min number user can choose to view in the page
 
     this.state = {
       showPreview: false,
       isPlaying: false,
       currentSong: null,
-      peekNo: 5, //number of songs user want to see in the list, default = 5
+      peekNo: Math.min(this.peekMax, 5), //number of songs user want to see in the list, default = 5
       counter: 0, //number of songs played already
 
       // peekQueueArr + backupArry = whole data list/loop;
@@ -30,9 +34,6 @@ class App extends Component {
       backupArr: [] // songs not displayed but will replenish peekQueue
     };
 
-    // TODO if only one song
-    this.peekMax = Math.min(this.data.length - 1, 8); // the max number user can choose to view in the page
-    this.peekMin = 1; // the min number user can choose to view in the page
 
     this.onPlayButtonClick = this.onPlayButtonClick.bind(this);
     this.onPlay = this.onPlay.bind(this);
@@ -46,7 +47,12 @@ class App extends Component {
       peekQueueArr: _.cloneDeep(this.data.slice(0, this.state.peekNo)),
       backupArr: _.cloneDeep(this.data.slice(this.state.peekNo)),
       currentSong: this.data[0]
-    });
+    }, () => {
+      console.log('after' + this.state.peekNo)
+  });
+    console.log('testsss')
+    console.log(this.peekMax);
+    console.log(this.state.peekNo)
   }
 
   // pass next song and play it
@@ -206,6 +212,7 @@ class App extends Component {
       peekQueueArr,
       peekNo
     } = this.state;
+    const isEmpty = this.data.length === 0;
     return (
       <div className="player">
         <Popover
@@ -220,12 +227,12 @@ class App extends Component {
               {showPreview && <h2>Now Playing</h2>}
             </header>
 
-            <Slider
+            {this.peekMax > 1 && <Slider
               defaultValue={peekNo}
               min={this.peekMin}
               max={this.peekMax}
               onChange={value => this.onSliderChange(value)}
-            />
+            />}
           </div>
         </Popover>
         {!showPreview && (
