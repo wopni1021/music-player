@@ -62,48 +62,48 @@ const data = [
   //   url: "/assets/music/music3.mp3"
   // }
 
-  {
-    title: "1",
-    singer: "Motorama",
-    image: "/assets/images/cover4.jpg",
-    url: "/assets/music/music4.mp3"
-  },
-  {
-    title: "2",
-    singer: "Bear in Heaven ",
-    image: "/assets/images/cover5.jpg",
-    url: "/assets/music/music5.mp3"
-  },
-  {
-    title: "3",
-    singer: "Soley",
-    image: "/assets/images/cover6.jpg",
-    url: "/assets/music/music6.mp3"
-  },
-  {
-    title: "4",
-    singer: "Stepdad Ordinaire",
-    image: "/assets/images/cover7.jpg",
-    url: "/assets/music/music7.mp3"
-  },
-  {
-    title: "5",
-    singer: "Sammy",
-    image: "/assets/images/cover8.jpg",
-    url: "/assets/music/music8.mp3"
-  },
-  {
-    title: "6",
-    singer: "Iris Lee",
-    image: "/assets/images/cover9.jpg",
-    url: "/assets/music/music9.mp3"
-  },
-  {
-    title: "7",
-    singer: "Sleepmakeswaves",
-    image: "/assets/images/cover0.jpg",
-    url: "/assets/music/music0.mp3"
-  },
+  // {
+  //   title: "1",
+  //   singer: "Motorama",
+  //   image: "/assets/images/cover4.jpg",
+  //   url: "/assets/music/music4.mp3"
+  // },
+  // {
+  //   title: "2",
+  //   singer: "Bear in Heaven ",
+  //   image: "/assets/images/cover5.jpg",
+  //   url: "/assets/music/music5.mp3"
+  // },
+  // {
+  //   title: "3",
+  //   singer: "Soley",
+  //   image: "/assets/images/cover6.jpg",
+  //   url: "/assets/music/music6.mp3"
+  // },
+  // {
+  //   title: "4",
+  //   singer: "Stepdad Ordinaire",
+  //   image: "/assets/images/cover7.jpg",
+  //   url: "/assets/music/music7.mp3"
+  // },
+  // {
+  //   title: "5",
+  //   singer: "Sammy",
+  //   image: "/assets/images/cover8.jpg",
+  //   url: "/assets/music/music8.mp3"
+  // },
+  // {
+  //   title: "6",
+  //   singer: "Iris Lee",
+  //   image: "/assets/images/cover9.jpg",
+  //   url: "/assets/music/music9.mp3"
+  // },
+  // {
+  //   title: "7",
+  //   singer: "Sleepmakeswaves",
+  //   image: "/assets/images/cover0.jpg",
+  //   url: "/assets/music/music0.mp3"
+  // },
   {
     title: "8",
     singer: "The Thermals",
@@ -115,13 +115,13 @@ const data = [
     singer: "Iron Chic",
     image: "/assets/images/cover2.jpg",
     url: "/assets/music/music2.mp3"
+  },
+  {
+    title: "10",
+    singer: "Douglas Dare",
+    image: "/assets/images/cover3.jpg",
+    url: "/assets/music/music3.mp3"
   }
-  // {
-  //   title: "10",
-  //   singer: "Douglas Dare",
-  //   image: "/assets/images/cover3.jpg",
-  //   url: "/assets/music/music3.mp3"
-  // }
 ];
 
 export default data;
