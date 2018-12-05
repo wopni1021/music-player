@@ -18,14 +18,14 @@ class App extends Component {
 
     this.data = data;
     this.dataLength = data.length;
-    this.peekMax = 120; // the max number in the slider for user to choose, default = 20
+    this.peekMax = 40; // the max number in the slider for user to choose, default = 20
     this.peekMin = 1; // the min number user can choose to view in the page, default = 1
 
     this.state = {
       showPreview: false,
       isPlaying: false,
       currentSong: null,
-      peekNo: 4, // initial state
+      peekNo: 6, // initial state, can be defined by user
 
       peekQueueArr: [], //songs to be played, displayed in the playlist, the first song is the next one to play
       backupArr: [] // songs not displayed but will be used to replenish peekQueue
@@ -48,7 +48,7 @@ class App extends Component {
     const noOfLoop = _.ceil(this.state.peekNo / this.dataLength); // number of loops needed to build peekQueue
     let array = [];
     for (let i = 0; i < noOfLoop; i++) {
-      array = array.concat(this.rearrangeSongs(_.cloneDeep(this.data)));
+      array = array.concat(this.rearrangeSongs(this.data));
     }
 
     this.lastSong = array[array.length - 1];
@@ -127,13 +127,13 @@ class App extends Component {
       audio
         .play()
         .then(
-          function() {
+          function () {
             this.setState({
               isPlaying: true
             });
           }.bind(this)
         )
-        .catch(function() {
+        .catch(function () {
           message.warning("Oops, play fail. Please play next!");
         });
     }
@@ -164,6 +164,7 @@ class App extends Component {
     var currentIndex = newArr.length,
       temporaryValue,
       randomIndex;
+    const arrCopy = _.cloneDeep(newArr);
 
     // While there remain elements to shuffle
     while (0 !== currentIndex) {
@@ -177,13 +178,21 @@ class App extends Component {
       newArr[randomIndex] = temporaryValue;
     }
 
+
     // if the first song is same as last song of the last loop, put it at the end to prevent consecutive same songs
     // skip if data length <=2, otherwise will make each loop the same
     if (_.isEqual(this.lastSong, newArr[0]) && this.dataLength > 2) {
       newArr.push(newArr.shift());
     }
+
+
+    // make sure the new loop is different from last one
+    if (_.isEqual(arrCopy, newArr)) {
+      newArr.push(newArr.shift());
+    }
+
     this.lastSong = newArr[newArr.length - 1];
-    return newArr;
+    return _.cloneDeep(newArr);
   }
 
   /**
@@ -194,7 +203,7 @@ class App extends Component {
     // if not enough backup songs, generate a new loop to replenish
     let backupCopy = _.cloneDeep(backupArr);
     if (backupCopy.length <= 0) {
-      backupCopy = this.rearrangeSongs(_.cloneDeep(this.data));
+      backupCopy = this.rearrangeSongs(this.data);
     }
 
     const peekQueueCopy = _.cloneDeep(peekQueueArr);
@@ -243,7 +252,7 @@ class App extends Component {
     const noOfLoop = _.ceil((value - wholeList.length) / this.dataLength); // number of loops needed to build new backupArr
 
     for (let i = 0; i < noOfLoop; i++) {
-      wholeList = wholeList.concat(this.rearrangeSongs(_.cloneDeep(this.data)));
+      wholeList = wholeList.concat(this.rearrangeSongs(this.data));
     }
 
     this.setState({
